@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 internal interface SubjectRepository : JpaRepository<Subject, Int> {
+
+    fun findFirstByUsername(name: String): Subject?
 }
