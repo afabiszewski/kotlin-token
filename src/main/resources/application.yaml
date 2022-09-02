@@ -1,4 +1,9 @@
 spring:
+  logging:
+    level:
+      org:
+        springdoc:
+          web: TRACE
   jpa:
     properties:
       hibernate:
