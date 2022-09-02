@@ -1,13 +1,24 @@
 package com.signicat.interview.domain
-import javax.persistence.*
+
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
+@Table(name = "subject")
 internal data class Subject(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    val id: Long = 0,
     val username: String,
     val password: String,
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @JoinTable(name = "subject_user_group", inverseJoinColumns = [JoinColumn(name = "user_group_id")])
     val groups: Set<UserGroup>
 )

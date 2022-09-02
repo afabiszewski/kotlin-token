@@ -1,13 +1,11 @@
 package com.signicat.interview.domain
 
-import kotlin.random.Random
+class UserApplication internal constructor(private val subjectRepository: SubjectRepository, private val groupRepository: GroupRepository) {
 
-class UserApplication internal constructor(private val subjectRepository: SubjectRepository) {
+    fun registerUser(name: String, password: String) : String {
+        val userGroup = UserGroup(name = "users")
+        val user = Subject(username = name, password = password, groups = setOf(userGroup))
 
-    fun createUser(name: String, password: String) : String {
-        val userGroup = UserGroup(Random.nextInt(), "users")
-
-        val user = Subject(Random.nextInt(), name, password, setOf(userGroup))
-        return name
+        return subjectRepository.save(user).username
     }
 }
