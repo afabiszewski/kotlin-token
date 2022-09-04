@@ -19,6 +19,10 @@ internal data class Subject(
     val username: String,
     val password: String,
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinTable(name = "subject_user_group", inverseJoinColumns = [JoinColumn(name = "user_group_id")])
+    @JoinTable(
+        name = "subject_user_group",
+        joinColumns = [JoinColumn(name = "subject_id")],
+        inverseJoinColumns = [JoinColumn(name = "user_group_id")]
+    )
     val groups: Set<UserGroup>
 )

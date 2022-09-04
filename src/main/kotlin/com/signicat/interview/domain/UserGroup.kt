@@ -8,7 +8,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "user_group")
-class UserGroup (
+class UserGroup(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,

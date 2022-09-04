@@ -6,13 +6,13 @@ import com.signicat.interview.infrastructure.exceptions.WrongPasswordException
 
 
 class UserApplication internal constructor(
-    private val subjectRepository: SubjectRepository
+    private val subjectRepository: SubjectRepository,
+    private val groupApplication: GroupApplication
 ) {
 
     fun registerUser(username: String, password: String): String {
-        val userGroup = UserGroup(name = "users")
-
-        val user = Subject(username = username, password = password, groups = setOf(userGroup))
+        val groups = groupApplication.getOrCreateGroups(setOf("user", "admin"))
+        val user = Subject(username = username, password = password, groups = groups)
         subjectRepository.findFirstByUsername(user.username)
             ?.let { throw UserAlreadyExistsException("Username $username already exists!") }
         return subjectRepository.save(user).username

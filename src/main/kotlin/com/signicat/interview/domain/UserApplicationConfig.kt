@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Configuration
 internal class UserApplicationConfig {
 
     @Bean
-    fun userApplication(subjectRepository: SubjectRepository): UserApplication =
-        UserApplication(subjectRepository)
+    fun userApplication(subjectRepository: SubjectRepository, groupApplication: GroupApplication): UserApplication =
+        UserApplication(subjectRepository, groupApplication)
 }
