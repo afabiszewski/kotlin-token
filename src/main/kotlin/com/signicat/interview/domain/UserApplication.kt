@@ -4,12 +4,14 @@ import com.signicat.interview.infrastructure.exceptions.UserAlreadyExistsExcepti
 import com.signicat.interview.infrastructure.exceptions.UserNotFoundException
 import com.signicat.interview.infrastructure.exceptions.WrongPasswordException
 
+
 class UserApplication internal constructor(
     private val subjectRepository: SubjectRepository
 ) {
 
     fun registerUser(username: String, password: String): String {
         val userGroup = UserGroup(name = "users")
+
         val user = Subject(username = username, password = password, groups = setOf(userGroup))
         subjectRepository.findFirstByUsername(user.username)
             ?.let { throw UserAlreadyExistsException("Username $username already exists!") }
@@ -18,8 +20,12 @@ class UserApplication internal constructor(
 
     fun signInUser(username: String, password: String): String {
         val user = subjectRepository.findFirstByUsername(username)
+        checkUserCredentials(user, username, password)
+        return "JWT_LOGGED_IN"
+    }
+
+    private fun checkUserCredentials(user: Subject?, username: String, password: String) {
         user?.username ?: throw UserNotFoundException("Username $username not found!")
         if (user.password != password) throw WrongPasswordException("Wrong password!")
-        return "LOGED IN"
     }
 }
