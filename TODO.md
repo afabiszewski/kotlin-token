@@ -8,3 +8,4 @@
 - [ ] Decouple subject and user group
 - [ ] Add swagger
 - [ ] Add local configuration with repository map implementation
+- [ ] Return 204 no content for group removal
