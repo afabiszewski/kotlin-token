@@ -1,8 +1,8 @@
 package com.signicat.interview.domain
 
-import com.signicat.interview.infrastructure.exceptions.UserAlreadyExistsException
-import com.signicat.interview.infrastructure.exceptions.UserNotFoundException
-import com.signicat.interview.infrastructure.exceptions.WrongPasswordException
+import com.signicat.interview.infrastructure.exception.UserAlreadyExistsException
+import com.signicat.interview.infrastructure.exception.UserNotFoundException
+import com.signicat.interview.infrastructure.exception.WrongPasswordException
 
 
 class UserApplication internal constructor(

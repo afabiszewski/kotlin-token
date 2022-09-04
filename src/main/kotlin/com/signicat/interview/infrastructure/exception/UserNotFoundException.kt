@@ -1,4 +1,4 @@
-package com.signicat.interview.infrastructure.exceptions
+package com.signicat.interview.infrastructure.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus

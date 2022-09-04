@@ -1,6 +1,8 @@
 package com.signicat.interview.infrastructure
 
 import com.signicat.interview.domain.UserApplication
+import com.signicat.interview.infrastructure.request.RegisterUserRequest
+import com.signicat.interview.infrastructure.request.SignInRequest
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

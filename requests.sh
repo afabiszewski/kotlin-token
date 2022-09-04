@@ -13,6 +13,10 @@ username=$(
   echo $RANDOM | base64 | head -c 20
   echo
 )
+group=$(
+  echo $RANDOM | base64 | head -c 20
+  echo
+)
 curl -XPOST -H"Content-Type: application/json" -d"{\"name\":\"curlName_$username\", \"password\":\"curlPassword\"}" localhost:8080/users
 
 printf "\n${RED}POST registerUser -> 403${NC} -> "
