@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 internal interface SubjectRepository : JpaRepository<Subject, Int> {
 
-    fun findFirstByUsername(username: String): Subject?
+    fun findByUsername(username: String): Subject?
 }

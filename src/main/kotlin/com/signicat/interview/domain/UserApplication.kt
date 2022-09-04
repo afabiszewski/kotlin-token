@@ -13,19 +13,19 @@ class UserApplication internal constructor(
     fun registerUser(username: String, password: String): String {
         val groups = groupApplication.getOrCreateGroups(setOf("user", "admin"))
         val user = Subject(username = username, password = password, groups = groups)
-        subjectRepository.findFirstByUsername(user.username)
+        subjectRepository.findByUsername(user.username)
             ?.let { throw UserAlreadyExistsException("Username $username already exists!") }
         return subjectRepository.save(user).username
     }
 
     fun signInUser(username: String, password: String): String {
-        val user = subjectRepository.findFirstByUsername(username)
+        val user = subjectRepository.findByUsername(username)
         checkUserCredentials(user, username, password)
         return "JWT_LOGGED_IN"
     }
 
-    private fun checkUserCredentials(user: Subject?, username: String, password: String) {
+    private fun checkUserCredentials(user: Subject?, username: String, password: String): Boolean {
         user?.username ?: throw UserNotFoundException("Username $username not found!")
-        if (user.password != password) throw WrongPasswordException("Wrong password!")
+        if (user.password != password) throw WrongPasswordException("Wrong password!") else return true
     }
 }
