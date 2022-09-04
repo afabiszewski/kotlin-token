@@ -9,3 +9,4 @@
 - [ ] Add swagger
 - [ ] Add local configuration with repository map implementation
 - [ ] Return 204 no content for group removal
+- [ ] Change 'generate token' test to inject clock
