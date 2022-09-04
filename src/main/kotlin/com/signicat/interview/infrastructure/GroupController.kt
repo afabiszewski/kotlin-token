@@ -23,7 +23,7 @@ class GroupController(internal val groupApplication: GroupApplication) {
         return groupApplication.createGroup(createGroupRequest.name)
     }
 
-    @DeleteMapping("/groups/{name}", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @DeleteMapping("/groups/{name}")
     fun removeGroup(@PathVariable name: String): String {
         return groupApplication.deleteGroup(name)
     }
