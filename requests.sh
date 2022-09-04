@@ -4,7 +4,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-printf "GET Hello\n"
+printf "${GREEN}GET hello -> 200${NC} -> "
 curl -XGET localhost:8080/hello
 
 printf "\n${GREEN}POST registerUser -> 200${NC} -> "
