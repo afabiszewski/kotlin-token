@@ -13,4 +13,5 @@
 - [ ] Make hibernate performance better by using bidirectional mapping
 - [ ] Add some interfaces
 - [ ] Use some `run` and `with`
+- [ ] Add public key for signing verification
 

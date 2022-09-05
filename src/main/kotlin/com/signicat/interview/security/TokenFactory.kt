@@ -23,12 +23,14 @@ class TokenFactory(
         serialize()
     }
 
-    fun generateForUser(userId: Long, userName: String, groups: Map<Long, String>): String = SignedJWT(
-        createHeader(), createClaimsSetForUser(userId, userName, groups)
-    ).run {
-        sign(ECDSASigner(key.toECPrivateKey()))
-        serialize()
-    }
+    fun generateForUser(userId: Long, userName: String, groups: Map<Long, String>): String =
+        SignedJWT(
+            createHeader(),
+            createClaimsSetForUser(userId, userName, groups)
+        ).run {
+            sign(ECDSASigner(key.toECPrivateKey()))
+            serialize()
+        }
 
     private fun createHeader() = JWSHeader.Builder(ES256).type(JWT).keyID(key.keyID).build()
 
@@ -42,14 +44,14 @@ class TokenFactory(
 
         data class ClaimGroup(val id: String, val name: String)
 
-        val claimGroups: List<ClaimGroup> =
-            groups.map { (groupId, groupName) -> ClaimGroup(groupId.toString(), groupName) }
-                .toCollection(LinkedList<ClaimGroup>())
+        val claimGroups: List<JwtPayload.GroupsPayload> =
+            groups.map { (groupId, groupName) -> JwtPayload.GroupsPayload(groupId.toString(), groupName) }
+                .toCollection(LinkedList<JwtPayload.GroupsPayload>())
+
+        val jwtPayload = JwtPayload(sub = userId.toString(), username = userName, groups = claimGroups)
 
         return JWTClaimsSet.Builder()
-            .claim("sub", userId)
-            .claim("username", userName)
-            .claim("group", claimGroups)
+            .claim("jwtPayload", jwtPayload)
             .build()
     }
 }
