@@ -10,6 +10,7 @@ class GroupApplication internal constructor(private val groupRepository: GroupRe
             ?: throw GroupNotFoundException("Group $groupName not found!")
     }
 
+
     fun createGroup(groupName: String): String {
         val userGroup = UserGroup(name = groupName)
         groupRepository.findByName(groupName)
@@ -29,4 +30,10 @@ class GroupApplication internal constructor(private val groupRepository: GroupRe
             groupRepository.findByName(groupName) ?: groupRepository.save(UserGroup(name = groupName))
         }.toSet()
     }
+
+    internal fun getGroupId(groupName: String): Long {
+        return groupRepository.findByName(groupName)?.id
+            ?: throw GroupNotFoundException("Group $groupName not found!")
+    }
+
 }

@@ -3,11 +3,13 @@ package com.signicat.interview.domain
 import com.signicat.interview.infrastructure.exception.UserAlreadyExistsException
 import com.signicat.interview.infrastructure.exception.UserNotFoundException
 import com.signicat.interview.infrastructure.exception.WrongPasswordException
+import com.signicat.interview.security.AuthorizationService
 
 
 class UserApplication internal constructor(
     private val subjectRepository: SubjectRepository,
-    private val groupApplication: GroupApplication
+    private val groupApplication: GroupApplication,
+    private val authorizationService: AuthorizationService
 ) {
 
     fun registerUser(username: String, password: String): String {
@@ -19,13 +21,11 @@ class UserApplication internal constructor(
     }
 
     fun signInUser(username: String, password: String): String {
-        val user = subjectRepository.findByUsername(username)
-        checkUserCredentials(user, username, password)
-        return "JWT_LOGGED_IN"
-    }
-
-    private fun checkUserCredentials(user: Subject?, username: String, password: String): Boolean {
-        user?.username ?: throw UserNotFoundException("Username $username not found!")
-        if (user.password != password) throw WrongPasswordException("Wrong password!") else return true
+        val user =
+            subjectRepository.findByUsername(username) ?: throw UserNotFoundException("Username $username not found!")
+        if (user.password != password) throw WrongPasswordException("Wrong password!")
+        val groupsMap = HashMap<Long, String>()
+        user.groups.forEach { userGroup -> groupsMap[userGroup.id] = userGroup.name }
+        return authorizationService.generateTokenForUser(user.id, username, groupsMap)
     }
 }

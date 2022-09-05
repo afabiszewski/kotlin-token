@@ -23,7 +23,8 @@ printf "\n${RED}POST registerUser -> 403${NC} -> "
 curl -XPOST -H"Content-Type: application/json" -d"{\"name\":\"curlName_$username\", \"password\":\"curlPassword\"}" localhost:8080/users
 
 printf "\n${GREEN}PUT signInUser -> 200${NC} -> "
-curl -XPUT -H"Content-Type: application/json" -d'{"password":"curlPassword"}' localhost:8080/users/curlName_"$username"/token
+JWT=$(curl -s -XPUT -H"Content-Type: application/json" -d'{"password":"curlPassword"}' localhost:8080/users/curlName_"$username"/token)
+printf $JWT
 
 printf "\n${RED}PUT signInUser -> 404${NC} -> "
 curl -XPUT -H"Content-Type: application/json" -d'{"password":"curlPassword"}' localhost:8080/users/nameDoesNotExist/token

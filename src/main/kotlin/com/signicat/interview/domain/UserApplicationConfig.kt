@@ -1,5 +1,6 @@
 package com.signicat.interview.domain
 
+import com.signicat.interview.security.AuthorizationService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -7,6 +8,10 @@ import org.springframework.context.annotation.Configuration
 internal class UserApplicationConfig {
 
     @Bean
-    fun userApplication(subjectRepository: SubjectRepository, groupApplication: GroupApplication): UserApplication =
-        UserApplication(subjectRepository, groupApplication)
+    fun userApplication(
+        subjectRepository: SubjectRepository,
+        groupApplication: GroupApplication,
+        authorizationService: AuthorizationService
+    ): UserApplication =
+        UserApplication(subjectRepository, groupApplication, authorizationService)
 }
