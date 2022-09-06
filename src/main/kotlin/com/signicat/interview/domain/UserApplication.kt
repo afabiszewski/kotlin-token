@@ -12,9 +12,9 @@ class UserApplication internal constructor(
     private val authorizationService: AuthorizationService
 ) {
 
-    fun registerUser(username: String, password: String): String {
-        val groups = groupApplication.getOrCreateGroups(setOf("user", "admin"))
-        val user = Subject(username = username, password = password, groups = groups)
+    fun registerUser(username: String, password: String, groups: List<String>): String {
+        val userGroups = groupApplication.getOrCreateGroups(groups.toSet())
+        val user = Subject(username = username, password = password, groups = userGroups)
         subjectRepository.findByUsername(user.username)
             ?.let { throw UserAlreadyExistsException("Username $username already exists!") }
         return subjectRepository.save(user).username

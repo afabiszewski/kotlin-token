@@ -14,7 +14,7 @@ class AuthorizationServiceConfiguration {
     @Bean
     fun tokenFactory(): TokenFactory {
         val key = ECKeyGenerator(Curve.P_256)
-            .keyID("afabiszewski-app-key")
+            .keyID("afabiszewski-app-pub-key")
             .generate()
 
         return TokenFactory(key)

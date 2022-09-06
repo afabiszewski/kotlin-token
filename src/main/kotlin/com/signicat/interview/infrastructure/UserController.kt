@@ -16,7 +16,11 @@ class UserController(internal val userApplication: UserApplication) {
 
     @PostMapping("/users", consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun registerUser(@RequestBody registerUserRequest: RegisterUserRequest): String {
-        return userApplication.registerUser(registerUserRequest.name, registerUserRequest.password)
+        return userApplication.registerUser(
+            registerUserRequest.name,
+            registerUserRequest.password,
+            registerUserRequest.groups
+        )
     }
 
     @PutMapping("/users/{name}/token", consumes = [MediaType.APPLICATION_JSON_VALUE])

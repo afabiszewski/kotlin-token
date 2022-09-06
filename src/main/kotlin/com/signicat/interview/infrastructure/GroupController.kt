@@ -21,7 +21,7 @@ class GroupController(
 
     @GetMapping("/groups/{name}")
     fun getGroup(@PathVariable name: String, @RequestHeader(name = "Authorization") token: String): String {
-        if (!authorizationService.isUserAuthorizedToAction(token)) throw UserUnauthorized("User is unauthorized")
+        if (!authorizationService.isUserAuthorizedForAction(token)) throw UserUnauthorized("User is unauthorized")
         return groupApplication.getGroup(name)
     }
 
@@ -29,13 +29,13 @@ class GroupController(
     fun createGroup(
         @RequestBody createGroupRequest: CreateGroupRequest, @RequestHeader(name = "Authorization") token: String
     ): String {
-        if (!authorizationService.isUserAuthorizedToAction(token)) throw UserUnauthorized("User is unauthorized")
+        if (!authorizationService.isUserAuthorizedForAction(token)) throw UserUnauthorized("User is unauthorized")
         return groupApplication.createGroup(createGroupRequest.name)
     }
 
     @DeleteMapping("/groups/{name}")
     fun removeGroup(@PathVariable name: String, @RequestHeader(name = "Authorization") token: String): String {
-        if (!authorizationService.isUserAuthorizedToAction(token)) throw UserUnauthorized("User is unauthorized")
+        if (!authorizationService.isUserAuthorizedForAction(token)) throw UserUnauthorized("User is unauthorized")
         return groupApplication.deleteGroup(name)
     }
 }
