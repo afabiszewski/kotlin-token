@@ -70,7 +70,6 @@ class UserApplicationTest {
     fun `sign in user returns token`() {
         val username = "testUsername"
         val password = "testPassword"
-        val groups = listOf("testGroup", "admin")
         val testGroup = UserGroup(1, "testGroup")
         val adminGroup = UserGroup(1, "adminGroup")
         every { groupRepository.findByName("testGroup") } returns testGroup
@@ -78,15 +77,14 @@ class UserApplicationTest {
         every { groupRepository.save(any()) } returns UserGroup(2, "admin")
         every { subjectRepository.findByUsername(username) } returns null
         every { subjectRepository.save(any()) } returns Subject(
-            username = username,
-            password = password,
-            groups = setOf(testGroup, adminGroup)
+            username = username, password = password, groups = setOf(testGroup, adminGroup)
         )
+        every { authorizationService.generateTokenForUser(any(), any(), any()) } returns "JWT"
 
-        val createdUser = userApplication.registerUser(username, password, groups)
+        val token = userApplication.signInUser(username, password)
 
         Assertions.assertEquals(
-            username, createdUser
+            username, token
         )
     }
 
