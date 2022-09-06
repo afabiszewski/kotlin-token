@@ -1,6 +1,6 @@
 # Todo
 
-- [ ] Add unit tests
+- [x] Add unit tests
 - [ ] Add integration tests
 - [ ] Add functional tests
 - [x] Add groups to `RegisterUserRequest`
