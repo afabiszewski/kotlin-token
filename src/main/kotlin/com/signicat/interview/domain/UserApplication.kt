@@ -5,7 +5,6 @@ import com.signicat.interview.infrastructure.exception.UserNotFoundException
 import com.signicat.interview.infrastructure.exception.WrongPasswordException
 import com.signicat.interview.security.AuthorizationService
 
-
 class UserApplication internal constructor(
     private val subjectRepository: SubjectRepository,
     private val groupApplication: GroupApplication,
