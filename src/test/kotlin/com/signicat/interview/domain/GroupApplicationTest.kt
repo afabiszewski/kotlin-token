@@ -83,8 +83,10 @@ class GroupApplicationTest {
 
     @Test
     fun `get or create groups returns groups`() {
-        val userGroup1 = UserGroup(1, "testGroup1")
-        val userGroup2 = UserGroup(2, "testGroup2")
+        val username1 = "testGroup1"
+        val username2 = "testGroup2"
+        val userGroup1 = UserGroup(1, username1)
+        val userGroup2 = UserGroup(2, username2)
         every { groupRepository.findByName(userGroup1.name) } returns userGroup1
         every { groupRepository.findByName(userGroup2.name) } returns null
         every { groupRepository.save(any()) } returns userGroup2
