@@ -2,7 +2,7 @@
 
 - [x] Add unit tests
 - [ ] Add integration tests
-- [ ] Add functional tests
+- [x] Add functional tests -> requests.sh
 - [x] Add groups to `RegisterUserRequest`
 - [ ] Add update group endpoint and some additional field in `UserGroup`
 - [ ] Decouple subject and user group
