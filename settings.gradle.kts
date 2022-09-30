@@ -1,1 +1,1 @@
-rootProject.name = "kotlin-jwt-example"
+rootProject.name = "kotlin-token-example"
