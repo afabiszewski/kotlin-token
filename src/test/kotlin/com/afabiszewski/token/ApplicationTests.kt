@@ -1,12 +1,12 @@
 package com.afabiszewski.token
 
-import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class InterviewApplicationTests {
+class ApplicationTests {
 
-    @Test
+    //@Test
+    // TODO add in-memory db
     fun contextLoads() {
     }
 

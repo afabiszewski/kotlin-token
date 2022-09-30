@@ -9,7 +9,7 @@ plugins {
     id("org.flywaydb.flyway") version "5.0.7"
 }
 
-group = "com.signicat"
+group = "com.afabiszewski"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
